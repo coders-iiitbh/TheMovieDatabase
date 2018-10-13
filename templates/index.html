@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+<!-- {% from "_formsheader.html" import render_field %} -->
+{% block content %}
+        <form action="/search" method="GET">
+        	{{ g.search_form.search }}
+        	
+        </form>
+
+{% endblock %}
