@@ -1,16 +1,20 @@
 from flask import Flask, redirect, render_template, flash, redirect, url_for, request,g 
-from flask_wtf import Form 
+from flask_wtf import FlaskForm 
 from wtforms import TextAreaField, BooleanField, StringField
 from wtforms.validators import DataRequired
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
+Bootstrap(app)
+
 
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'FuckOFF'
 
 
-class SearchForm(Form):
-    search = StringField('search', validators=[DataRequired()])
+class SearchForm(FlaskForm):
+    search = StringField()
 
 
 @app.route("/", methods=['GET'])
@@ -21,8 +25,7 @@ def index():
 @app.route('/search')
 def search():
 		q = request.args.get('search')
-    		return "HELLO %s" %q
-    	
+		return q
 
 if __name__ == '__main__':
      app.run()
