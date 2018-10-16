@@ -1,7 +1,6 @@
 label{
     display: none;
 }
-.mycont{
-    top: 60%;
-    position: relative;
+body{
+    background-image: url("img/slider-bg.jpg");
 }

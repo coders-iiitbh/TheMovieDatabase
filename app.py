@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'FuckOFF'
 
 
 class SearchForm(FlaskForm):
-    search = StringField()
+    search = StringField('search')
 
 
 @app.route("/", methods=['GET'])
@@ -25,7 +25,13 @@ def index():
 @app.route('/search')
 def search():
 		q = request.args.get('search')
-		return q
+		return render_template('gallery.html', args=q)
+
+
+
+@app.route('/single')
+def single():
+		return render_template('single.html')
 
 if __name__ == '__main__':
      app.run()
