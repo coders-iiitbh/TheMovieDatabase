@@ -1,5 +1,5 @@
 venv/
-
+whoosh/
 *.pyc
 __pycache__/
 

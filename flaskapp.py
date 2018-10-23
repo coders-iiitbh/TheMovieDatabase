@@ -10,7 +10,7 @@ app = Flask(__name__)
 # configurations of the flask application
 app.config['SECRET_KEY'] = 'okaycool'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:adi@localhost/sample_db'
-#app.config['SQLALCHEMY_TRACCK_MODIFICATIONS'] = True
+#app.config['SQLALCHEMY_TRACCK_MODIFICATIONS'] = True-
 app.config['WHOOSH_BASE'] = 'whoosh'
 
 # instantiate the database object
@@ -53,10 +53,10 @@ def search():
 
 @app.route('/search_results/<query>')
 def search_results(query):
-  # results = Movie.query.whoosh_search(query).all()
-  # return str(request.form)
-  res =  db.session.query(Movie).all()
-  print( str(res));
+   results = Movie.query.whoosh_search(query).all()
+   return str(request.form)
+  #res =  db.session.query(Movie).all()
+  #print( str(res));
 
 if __name__ == '__main__' :
     app.run(debug=True, host='0.0.0.0')
