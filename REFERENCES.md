@@ -1,4 +1,4 @@
-# Refereces
+# References
 This file contains the links to various sites to the problems faced during various times as well as the documentation of the libraries 
 - [flask-documentation](http://flask.pocoo.org/docs/1.0/)
 - [Jinga2](http://jinja.pocoo.org/docs/2.10/)
