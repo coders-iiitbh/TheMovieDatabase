@@ -48,7 +48,8 @@ db.session.commit()
 @app.route('/home')
 @app.route('/')
 def home():
-    return render_template('home.html')
+    posts = Movie.query.limit(10).all()
+    return render_template('home.html', posts=posts)
 
 @app.route('/about')
 def about():
@@ -65,6 +66,10 @@ def search():
 def search_results(query):
     results = Movie.query.search(query).limit(5).all()
     return render_template('search_result.html', results=results)
+
+@app.route('/search/<name>', methods=['GET', 'POST'])
+def movie_landing(name=None):
+    return render_template('landing_page.html', name=name)
 
 if __name__ == '__main__' :
     app.run(debug=True, host='0.0.0.0')
