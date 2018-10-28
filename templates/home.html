@@ -1,20 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-  <!-- <section class="details-card"> -->
-  <div class="container">
-      <div class="card-deck">
-      <!-- <div class="row"> -->
-      {%for post in posts%}
-        <div class="card" style="width: 50rem;">
-          <img class="card-img-top" src="https://placeimg.com/380/230/tech" alt="Card image cap" height=300px width=400px>
-          <div class="card-body">
-            <p class="card-text">{{ post.content }}</p>
-            <a href="{{ url_for('movie_landing', name=post.name) }}" class="btn btn-primary">More...</a>
-          </div>
-        </div>
-      {%endfor%}
-      </div>
-    <!-- </div> -->
-    </div>
-  <!-- </section> -->
+<div class="album py-5 ">
+<div class="container">
+<div class="row">
+{% for movie in top %}
+<div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+              <a class="py-2" href="{{ url_for('movie_landing', name=movie.title) }}">
+                <svg width="338" height="225" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 225" preserveAspectRatio="none"><defs><style type="text/css">#holder_1667e51c1a8 text { fill:#eceeef;font-weight:bold;font-family:Arial, Helvetica, Open Sans, sans-serif, monospace;font-size:17pt } </style></defs><g id="holder_1667e51c1a8"><rect width="348" height="225" fill="#55595c"></rect><g><text x="116.45000076293945" y="120.3">Thumbnail</text></g></g></svg>
+            </a>
+                <div class="card-body">
+                  <h4 class="card-title">{{ movie.title }}</h4>
+                  <p class="card-text">{{ movie.actors }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="{{ url_for('movie_landing', name=movie.title) }}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    </div>
+                    <small class="text-muted">{{ movie.year }}</small>
+                  </div>
+                </div>
+              </div>
+</div>
+{%endfor%}
+</div>
+</div>
+</div>
 {% endblock content %}
