@@ -30,10 +30,10 @@ class Movie(db.Model):
 
     rank = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode(255))
-    genre = db.Column(db.UnicodeText)
+    genre = db.Column(db.ARRAY(db.UnicodeText))
     description = db.Column(db.UnicodeText)
     director = db.Column(db.Unicode(255))
-    actors = db.Column(db.UnicodeText)
+    actors = db.Column(db.ARRAY(db.UnicodeText))
     year = db.Column(db.Integer)
     runtime = db.Column(db.Integer)
     rating = db.Column(db.Float)
@@ -43,18 +43,18 @@ class Movie(db.Model):
 
     search_vector = db.Column(TSVectorType('title', 'description'))
 
-    def __init__(self, title, genre, description, director, actors, year, runtime, rating, votes, revenue, metascore):
-        self.title = title
-        self.genre = genre
-        self.description = description
-        self.director = director
-        self.actors = actors
-        self.year = year
-        self.runtime = runtime
-        self.rating = rating
-        self.votes = votes
-        self.revenue = revenue
-        self.metascore = metascore
+    # def __init__(self, title, genre, description, director, actors, year, runtime, rating, votes, revenue, metascore):
+    #     self.title = title
+    #     self.genre = genre
+    #     self.description = description
+    #     self.director = director
+    #     self.actors = actors
+    #     self.year = year
+    #     self.runtime = runtime
+    #     self.rating = rating
+    #     self.votes = votes
+    #     self.revenue = revenue
+    #     self.metascore = metascore
 
     def __repr__(self):
         return '<Movie %r>' % self.title
@@ -67,7 +67,7 @@ db.session.commit()
 @app.route('/home')
 @app.route('/')
 def home():
-    top = Movie.query.filter(Movie.year >= 2016).all()
+    top = Movie.query.all()
     return render_template('home.html', top=top)
 
 @app.route('/about')
@@ -77,8 +77,9 @@ def about():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
-    if form.validate_on_submit():
-        results = Movie.query.search(form.search.data).limit(5).all()
+    query = request.args.get('search')
+    if request.method == 'GET' and query != None :
+        results = Movie.query.search(query).limit(5).all()
         return render_template('searchpage.html', results=results, form=form)
     return render_template('searchpage.html', form=form)
 
@@ -87,7 +88,7 @@ def search():
 #     results = Movie.query.search(query).limit(5).all()
 #     return render_template('search_result.html', results=results)
 
-@app.route('/search/<name>', methods=['GET', 'POST'])
+@app.route('/search/<string:name>', methods=['GET', 'POST'])
 def movie_landing(name=None):
     return render_template('landing_page.html', name=name)
 

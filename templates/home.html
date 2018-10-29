@@ -11,7 +11,11 @@
             </a>
                 <div class="card-body">
                   <h4 class="card-title">{{ movie.title }}</h4>
-                  <p class="card-text">{{ movie.actors }}</p>
+                  <p class="card-text">
+                    {% for actor in movie.actors %}
+                    {{ actor }},
+                    {% endfor %}
+                  </p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="{{ url_for('movie_landing', name=movie.title) }}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
