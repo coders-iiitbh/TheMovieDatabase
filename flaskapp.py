@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # configurations of the flask application
 app.config['SECRET_KEY'] = 'okaycool'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:adi@localhost/sample_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:root@localhost/moviedb'
 app.config['SQLALCHEMY_TRACCK_MODIFICATIONS'] = True
 
 # instantiate the database object
