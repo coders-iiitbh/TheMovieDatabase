@@ -34,6 +34,6 @@ def single():
 		return render_template('single.html')
 
 if __name__ == '__main__':
-     app.run()
+     app.run(host="0.0.0.0")
 
 
