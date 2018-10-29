@@ -1,7 +1,44 @@
-label{
+.control-label{
+    display: none;
+}
+.form-inline label
+{
     display: none;
 }
 body{
     background-image: url("img/bg-gallary.svg");
     background-color: #222736
+}
+
+.carousel-inner img {
+    /*-webkit-filter: grayscale(90%);
+    /*filter: grayscale(90%); /* make all photos black and white */
+    width: 75%; /* Set width to 100% */
+    margin: auto;
+    height: 75%;
+}
+
+.carousel-caption h3 {
+    color: #fff !important;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}
+
+.row{
+    margin-left: 65px;
+    margin-right: 65px;
+}
+
+a{
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 501;   
+}
+
+#mynav{
+    border-radius: 10px;
 }
