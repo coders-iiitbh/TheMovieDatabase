@@ -1,13 +1,13 @@
 # TheMovieDatabase
 A simple flask-based website for viewing various movies and their related information. It's a part of our semester project for RDBMS course.
 
-## Techstack 
+## Techstack
 * PostgreSQL (for Database)
 * Flask (for web-framework)
 * Python (backend)
 * Bootstrap (GUI)
 
-We will be using the public dataset from IMDb for all the data related to the movies and shizz. 
+We will be using the public dataset from IMDb for all the data related to the movies and shizz.
 
 ### Checklist
 - [X] Basic website skel added
@@ -15,5 +15,6 @@ We will be using the public dataset from IMDb for all the data related to the mo
 - [X] Full-Text Search Enabled
 - [X] Basic Routing added
 - [ ] Enhance GUI
+- [ ] Solve the problems with viedo in modals
 - [X] Add cards on homepage
 - [X] Update the database
