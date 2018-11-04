@@ -15,5 +15,5 @@ We will be using the public dataset from IMDb for all the data related to the mo
 - [X] Full-Text Search Enabled
 - [X] Basic Routing added
 - [ ] Enhance GUI
-- [ ] Add cards on homepage
-- [ ] Update the database
+- [X] Add cards on homepage
+- [X] Update the database
