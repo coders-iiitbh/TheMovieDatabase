@@ -16,15 +16,100 @@
     </form>
   </div>
   {% if results %}
+  <div class="album py-5 ">
+    <div class="container">
+      <div class="row">
   {%for movie in results%}
-  <article class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="{{ url_for('movie_landing', name=movie.title) }}">{{ movie.title }}</a>
+  <div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+      <!-- <a class="py-2" href="{{ url_for('movie_landing', name=movie.title) }}">
+        <svg width="338" height="225" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 225" preserveAspectRatio="none"><defs><style type="text/css">#holder_1667e51c1a8 text { fill:#eceeef;font-weight:bold;font-family:Arial, Helvetica, Open Sans, sans-serif, monospace;font-size:17pt } </style></defs><g id="holder_1667e51c1a8"><rect width="348" height="225" fill="#55595c"></rect><g><text x="116.45000076293945" y="120.3">Thumbnail</text></g></g></svg>
+      </a> -->
+       <img class="img-fluid" src="{{movie.posterpic}}" alt="{{movie.name}}">
+          <div class="card-body">
+            <h4 class="card-title">{{ movie.title }}</h4>
+            <p class="card-text">
+              {% for actor in movie.actors %}
+              {{ actor }},
+              {% endfor %}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- <div class="btn-group">
+                <a href="{{ url_for('movie_landing', name=movie.title) }}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+              </div> -->
+              <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/{{movie.ytv}}" data-target="#movierank{{movie.rank}}">View</button>
+              <small class="text-muted">{{ movie.year }}</small>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="article-content">{{ movie.description }}</p>
-    </div>
-  </article>
+      <div class="modal fade" id="movierank{{movie.rank}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">{{movie.title}}</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>{{movie.description}}</p>
+              <h5>Actors:</h5>
+                <p>
+                  <ul>
+                  {% for actor in movie.actors%}
+                  <li>{{actor}}</li>
+                  {% endfor %}
+                  </ul>
+                </p>
+                <div class="embed-responsive embed-responsive-16by9 videoWrapper">
+                  <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+      $(document).ready(function() {
+
+      // Gets the video src from the data-src on each button
+
+      var $videoSrc;
+      $('.video-btn').click(function() {
+          $videoSrc = $(this).data( "src" );
+      });
+
+
+
+      // when the modal is opened autoplay it
+      $('#movierank{{movie.rank}}').on('shown.bs.modal', function (e) {
+
+      // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+      $("#video").attr('src',$videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" );
+      })
+
+
+      // stop playing the youtube video when I close the modal
+      $('#movierank{{movie.rank}}').on('hide.bs.modal', function (e) {
+          // a poor man's stop video
+          $("#video").attr('src',$videoSrc);
+      })
+
+
+
+
+
+
+      // document ready
+      });
+
+      </script>
   {%endfor%}
+      </div>
+  </div>
+</div>
   {% endif %}
 {% endblock content %}

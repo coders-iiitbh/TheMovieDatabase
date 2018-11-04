@@ -6,9 +6,10 @@
 {% for movie in top %}
         <div class="col-md-4">
           <div class="card mb-4 box-shadow">
-            <a class="py-2" href="{{ url_for('movie_landing', name=movie.title) }}">
+            <!-- <a class="py-2" href="{{ url_for('movie_landing', name=movie.title) }}">
               <svg width="338" height="225" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 225" preserveAspectRatio="none"><defs><style type="text/css">#holder_1667e51c1a8 text { fill:#eceeef;font-weight:bold;font-family:Arial, Helvetica, Open Sans, sans-serif, monospace;font-size:17pt } </style></defs><g id="holder_1667e51c1a8"><rect width="348" height="225" fill="#55595c"></rect><g><text x="116.45000076293945" y="120.3">Thumbnail</text></g></g></svg>
-            </a>
+            </a> -->
+             <img class="img-fluid" src="{{movie.posterpic}}" alt="{{movie.name}}">
                 <div class="card-body">
                   <h4 class="card-title">{{ movie.title }}</h4>
                   <p class="card-text">
@@ -20,7 +21,7 @@
                     <!-- <div class="btn-group">
                       <a href="{{ url_for('movie_landing', name=movie.title) }}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                     </div> -->
-                    <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/d96cjJhvlMA" data-target="#movierank{{movie.rank}}">View</button>
+                    <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/{{movie.ytv}}" data-target="#movierank{{movie.rank}}">View</button>
                     <small class="text-muted">{{ movie.year }}</small>
                   </div>
                 </div>
@@ -45,7 +46,7 @@
                         {% endfor %}
                         </ul>
                       </p>
-                      <div class="embed-responsive embed-responsive-16by9">
+                      <div class="embed-responsive embed-responsive-16by9 videoWrapper">
                         <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
                       </div>
                   </div>

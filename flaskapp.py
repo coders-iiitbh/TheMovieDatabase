@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # configurations of the flask application
 app.config['SECRET_KEY'] = 'okaycool'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:root@localhost/moviedb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:root@localhost/sample_db'
 app.config['SQLALCHEMY_TRACCK_MODIFICATIONS'] = True
 
 # instantiate the database object
@@ -40,10 +40,13 @@ class Movie(db.Model):
     votes = db.Column(db.Integer)
     revenue = db.Column(db.Float)
     metascore = db.Column(db.Integer)
+    posterpic = db.Column(db.Unicode)                           #drop previous table, re-create the table and add data in table to carry on further
+    ytv = db.Column(db.UnicodeText)
 
     search_vector = db.Column(TSVectorType('title', 'description'))
 
-    # def __init__(self, title, genre, description, director, actors, year, runtime, rating, votes, revenue, metascore):
+    # def __init__(self, title, genre, description, director, actors, year,
+    #                             runtime, rating, votes, revenue, metascore, posterpic, yturl):
     #     self.title = title
     #     self.genre = genre
     #     self.description = description
@@ -67,7 +70,7 @@ db.session.commit()
 @app.route('/home')
 @app.route('/')
 def home():
-    top = Movie.query.all()
+    top = Movie.query.filter(Movie.year >= 2016).order_by(Movie.rating.desc()).limit(10).all()
     return render_template('home.html', top=top)
 
 @app.route('/about')
