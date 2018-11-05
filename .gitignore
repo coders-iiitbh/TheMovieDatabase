@@ -1,3 +1,4 @@
+coala-venv/
 venv/
 whoosh/
 *.pyc
